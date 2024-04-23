@@ -1,1 +1,55 @@
-<p>list works!</p>
+<!-- search area -->
+<div class="search-wrap">
+  <nz-form-item>
+    <nz-form-label>器材名称</nz-form-label>
+    <nz-form-control>
+      <nz-input-group>
+        <input nz-input type="text" [(ngModel)]="name" placeholder="请输入器材名称" />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label>存储位置</nz-form-label>
+    <nz-form-control>
+      <nz-input-group>
+        <input nz-input type="text" [(ngModel)]="storagePlace" placeholder="请输入存储位置" />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control>
+      <button nz-button [nzType]="'primary'" (click)="searchHandle()">搜索</button>
+      <button nz-button nzType="primary" (click)="resetHandle()">重置</button>
+    </nz-form-control>
+  </nz-form-item>
+</div>
+<!-- data display -->
+<button class="button--add" nz-button [nzType]="'primary'" (click)="addOrModifyHandle()">新增</button>
+<nz-table #basicTable [nzData]="list">
+  <thead>
+    <tr>
+      <th>名称</th>
+      <th>数量</th>
+      <th>单位</th>
+      <th>存放位置</th>
+      <th>入库日期</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of basicTable.data">
+      <td>{{ data.name }}</td>
+      <td>{{ data.quantity }}</td>
+      <td>{{ data.unit }}</td>
+      <td>{{ data.storagePlace }}</td>
+      <td>{{ data.putAwayDate }}</td>
+      <td>
+        <a (click)="addOrModifyHandle(data.id)">编辑</a>
+        <nz-divider nzType="vertical"></nz-divider>
+        <a (click)="showDetail(data.id)">详情</a>
+        <nz-divider nzType="vertical"></nz-divider>
+        <a (click)="deleteHandle(data.id)">删除</a>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
