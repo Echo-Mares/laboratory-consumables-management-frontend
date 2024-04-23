@@ -23,8 +23,8 @@
     </nz-form-control>
   </nz-form-item>
 </div>
-<!-- data display -->
 <button class="button--add" nz-button [nzType]="'primary'" (click)="addOrModifyHandle()">新增</button>
+<!-- data display -->
 <nz-table #basicTable [nzData]="list">
   <thead>
     <tr>
@@ -53,3 +53,45 @@
     </tr>
   </tbody>
 </nz-table>
+
+<!-- model data -->
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="modelTitle" (nzOnCancel)="handleCancel()">
+  <div *nzModalContent>
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>名称</nz-form-label>
+        <nz-form-control [nzSm]="16" [nzXs]="24">
+          <input nz-input type="text" formControlName="name" placeholder="请输入耗材名称" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>数量</nz-form-label>
+        <nz-form-control [nzSm]="16" [nzXs]="24">
+          <input nz-input type="text" formControlName="quantity" placeholder="请输入耗材数量" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>单位</nz-form-label>
+        <nz-form-control [nzSm]="16" [nzXs]="24">
+          <input nz-input type="text" formControlName="unit" placeholder="请输入耗材单位" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>存放位置</nz-form-label>
+        <nz-form-control [nzSm]="16" [nzXs]="24">
+          <input nz-input type="text" formControlName="storagePlace" placeholder="请输入存放位置" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>入库日期</nz-form-label>
+        <nz-form-control [nzSm]="16" [nzXs]="24">
+          <nz-date-picker formControlName="putAwayDate"></nz-date-picker>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </div>
+  <div *nzModalFooter>
+    <button nz-button nzType="default" (click)="handleCancel()">取消</button>
+    <button nz-button nzType="primary" (click)="handleOk()" [nzLoading]="isConfirmLoading">{{modelTitle}}</button>
+  </div>
+</nz-modal>
